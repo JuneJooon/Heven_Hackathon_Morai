@@ -1,0 +1,31 @@
+# MORAI 기본 코드 노드 설정. 비운 파일 경로는 이 패키지 course/의 MORAI 코스 파일을 씁니다.
+hk_morai_localization:
+  ros__parameters:
+    course_json: ""               # 출발·체크포인트 자세와 지도 원점 (morai_course.json)
+    sensor_timeout: 0.5
+    position_alpha: 0.35
+    speed_alpha: 0.5
+    speed_window: 0.3             # 속력 회귀 구간 s. 노이즈 없는 가감속의 추정 지연 완화
+hk_morai_planner:
+  ros__parameters:
+    ahead_m: 30.0                 # 차 앞으로 내보낼 경로 길이 (m)
+    behind_m: 2.0                 # 차 뒤로 남길 경로 길이 (m)
+    route_csv: ""                 # 전역 경로 (morai_global_path.csv, 0.5 m 간격)
+hk_morai_control:
+  ros__parameters:
+    target_speed: 8.0             # 목표 속력 (m/s)
+    k_stanley: 1.0                # Stanley: 옆으로 벗어난 거리에 대한 조향 세기
+    k_soft: 1.0                   # Stanley: 저속에서 조향이 너무 세지지 않게 (m/s)
+    kp: 0.5                       # 속력 P 이득
+    ki: 0.05                      # 속력 I 이득
+    brake_gain: 0.6               # 너무 빠를 때 제동 세기
+    brake_kp: 0.5                 # 가속 kp와 독립적인 제동 P 이득
+    brake_on_error: 0.3           # 목표 초과속력 m/s, 이 이상에서 제동 시작
+    brake_off_error: 0.1          # 이 이하로 줄면 제동 해제 (on보다 작게)
+    lateral_accel: 1.8            # 곡선 허용 횡가속도 m/s^2
+    planning_decel: 1.5           # 감속 프로파일 m/s^2
+    speed_margin: 0.5             # 법정 제한보다 낮출 속도 m/s
+    zone_buffer: 5.0              # 제한 구간 전후 여유 m
+    input_timeout: 0.5            # odom/path 유효 시간 s
+    launch_accel: 1.0             # 목표속도 증가율 m/s^2
+    steer_rate: 1.0               # 앞바퀴 조향 변화율 rad/s
